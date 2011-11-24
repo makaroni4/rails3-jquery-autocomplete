@@ -3,7 +3,6 @@ module Rails3JQueryAutocomplete
     def self.included(target)
       target.extend Rails3JQueryAutocomplete::Autocomplete::ClassMethods
       target.send :include, Rails3JQueryAutocomplete::Orm::ActiveRecord
-      end
     end
 
     #
