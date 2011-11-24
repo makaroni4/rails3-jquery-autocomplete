@@ -1,3 +1,4 @@
+require "cgi"
 module Rails3JQueryAutocomplete
   module Orm
     module ActiveRecord
@@ -10,7 +11,7 @@ module Rails3JQueryAutocomplete
 
       def get_autocomplete_items(parameters)
         model   = parameters[:model]
-        term    = parameters[:term]
+        term    = CGI.unescape(parameters[:term])
         method  = parameters[:method]
         options = parameters[:options]
         scopes  = Array(options[:scopes])
