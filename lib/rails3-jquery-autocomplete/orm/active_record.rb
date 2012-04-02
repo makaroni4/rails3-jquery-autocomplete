@@ -33,7 +33,7 @@ module Rails3JQueryAutocomplete
       def get_autocomplete_select_clause(model, method, options)
         table_name = model.table_name
         primary_key = model.primary_key
-        translations_table = "#{model.name.underscore.pluralize}_translations"
+        translations_table = "#{model.name.underscore}_translations"
         
         (["#{table_name}.#{primary_key}", "#{options[:globalized] ? translations_table : table_name}.#{method}"] + (options[:extra_data].blank? ? [] : options[:extra_data]))
       end
@@ -42,7 +42,7 @@ module Rails3JQueryAutocomplete
         table_name = model.table_name
         is_full_search = options[:full]
         like_clause = (postgres? ? 'ILIKE' : 'LIKE')
-        search_field = options[:globalized] ? "#{model.name.underscore.pluralize}_translations.#{method}" : method
+        search_field = options[:globalized] ? "#{model.name.underscore}_translations.#{method}" : method
         ["LOWER(#{search_field}) #{like_clause} ?", "#{(is_full_search ? '%' : '')}#{term.downcase}%"]
       end
 
