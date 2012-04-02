@@ -42,7 +42,7 @@ module Rails3JQueryAutocomplete
         table_name = model.table_name
         is_full_search = options[:full]
         like_clause = (postgres? ? 'ILIKE' : 'LIKE')
-        search_field = options[:globalized] ? method : "#{model.pluralize}_translations.#{method}"
+        search_field = options[:globalized] ? method : "#{model.name.downcase.pluralize}_translations.#{method}"
         ["LOWER(#{search_field}) #{like_clause} ?", "#{(is_full_search ? '%' : '')}#{term.downcase}%"]
       end
 
